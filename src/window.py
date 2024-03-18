@@ -6,16 +6,17 @@ class Window:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.__root = Tk()
-        self.__root.title = "Title"
-        self.__root.protocol("WM_DELETE_WINDOW", self.close)
-        self.__canvas = Canvas(self.__root)
-        self.__canvas.pack()
+        self._root = Tk()
+        self._root.title("Title")
+        self._root.geometry(f"{width}x{height}+120+80")
+        self._root.protocol("WM_DELETE_WINDOW", self.close)
+        self._canvas = Canvas(self._root, width=width, height=height, borderwidth=0, highlightthickness=0)
+        self._canvas.pack()
         self.is_running = False
     
     def redraw(self):
-        self.__root.update_idletasks()
-        self.__root.update()
+        self._root.update_idletasks()
+        self._root.update()
 
     def wait_for_close(self):
         while self.is_running:
@@ -27,4 +28,4 @@ class Window:
     def draw_line(self, line, fill_color):
         if not isinstance(line, Line):
             return
-        line.draw(self.__canvas, fill_color)
+        line.draw(self._canvas, fill_color)

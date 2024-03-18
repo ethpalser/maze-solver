@@ -1,22 +1,23 @@
 from window import Window
 from line import Line
 from point import Point
+from cell import Cell
 
 def main():
     width = 800
     height = 600
     win = Window(width, height)
 
-    top_left_point = Point(0, 0)
-    top_right_point = Point(width, 0)
-    bottom_left_point = Point(0, height)
-    bottom_right_point = Point(width, height)
-    win.draw_line(Line(top_left_point, top_right_point), "black")
-    win.draw_line(Line(top_left_point, bottom_left_point), "black")
-    win.draw_line(Line(top_right_point, bottom_right_point), "black")
-    win.draw_line(Line(bottom_left_point, bottom_right_point), "black")
-    win.draw_line(Line(top_left_point, bottom_right_point), "red")
-    win.draw_line(Line(top_right_point, bottom_left_point), "red")
+    cells = []
+    cell_width = 40
+    for i in range(0, width, cell_width):
+        for j in range(0, height, cell_width):
+            cells.append(Cell(win, i, j, i + cell_width, j + cell_width))
+            print(f"Added cell: 'x1':{i} 'x2':{i+cell_width} 'y1':{j} 'y2'{j+cell_width}:")
+    
+    for cell in cells:
+        if isinstance(cell, Cell):
+            cell.draw("black")
     
     win.is_running = True
     print("Running!")
