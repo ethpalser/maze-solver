@@ -10,15 +10,16 @@ def main():
 
     cells = []
     cell_width = 40
-    for i in range(0, width, cell_width):
-        for j in range(0, height, cell_width):
+    for j in range(0, height, cell_width):
+        for i in range(0, width, cell_width):
             cells.append(Cell(win, i, j, i + cell_width, j + cell_width))
-            print(f"Added cell: 'x1':{i} 'x2':{i+cell_width} 'y1':{j} 'y2'{j+cell_width}:")
     
     for cell in cells:
         if isinstance(cell, Cell):
             cell.draw("black")
     
+    cells[2].draw_move(cells[3])
+
     win.is_running = True
     print("Running!")
     win.wait_for_close()

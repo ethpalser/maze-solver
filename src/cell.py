@@ -27,6 +27,9 @@ class Cell:
         self.has_top_wall = has_top_wall
         self.has_bottom_wall = has_bottom_wall
 
+    def center_point(self):
+        return Point((self._min_x + self._max_x) / 2, (self._min_y + self._max_y) / 2)
+
     def draw(self, fill_color):
         if self._win is None or not isinstance(self._win, Window):
             return
@@ -43,3 +46,12 @@ class Cell:
             self._win.draw_line(Line(top_right_point, bottom_right_point), fill_color)
         if self.has_bottom_wall:
             self._win.draw_line(Line(bottom_left_point, bottom_right_point), fill_color)
+    
+
+    def draw_move(self, to_cell, undo=False):
+        if to_cell is None:
+            return
+        if not isinstance(to_cell, Cell):
+            raise ValueError("Movement cannot be performed as the destination is not a cell")
+        fill_color = "grey" if undo else "red"
+        self._win.draw_line(Line(self.center_point(), to_cell.center_point()), fill_color)
