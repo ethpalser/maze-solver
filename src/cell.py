@@ -18,7 +18,6 @@ class Cell:
         for point in [x1, x2, y1, y2]:
             if not isinstance(point, int):
                 raise ValueError("Points in a cell must be an integer.")
-        self._win = window
         self._min_x = min(x1, x2)
         self._min_y = min(y1, y2)
         self._max_x = max(x1, x2)
@@ -27,6 +26,7 @@ class Cell:
         self.has_right_wall = has_right_wall
         self.has_top_wall = has_top_wall
         self.has_bottom_wall = has_bottom_wall
+        self._win = window
 
     def center_point(self):
         return Point((self._min_x + self._max_x) / 2, (self._min_y + self._max_y) / 2)

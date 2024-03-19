@@ -26,3 +26,16 @@ class TestMaze(unittest.TestCase):
         num_cols = -1
         self.assertRaises(ValueError, lambda : Maze(0, 0, num_rows, 0, 10, 10))
         self.assertRaises(ValueError, lambda : Maze(0, 0, 0, num_cols, 10, 10))
+
+    def test_break_entrance_and_exit(self):
+        # Given
+        num_rows = 2
+        num_cols = 2
+        # When
+        maze = Maze(0, 0, num_rows, num_cols, 10, 10)
+        # Then
+        self.assertFalse(maze._cells[0][0].has_top_wall)
+        self.assertFalse(maze._cells[num_rows-1][num_cols-1].has_bottom_wall)
+
+if __name__ == "__main__":
+    unittest.main()
