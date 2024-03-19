@@ -10,7 +10,7 @@ class Window:
         self._root.title("Title")
         self._root.geometry(f"{width}x{height}+120+80")
         self._root.protocol("WM_DELETE_WINDOW", self.close)
-        self._canvas = Canvas(self._root, width=width, height=height, borderwidth=0, highlightthickness=0)
+        self._canvas = Canvas(self._root, width=width, height=height, borderwidth=0, highlightthickness=0, background="white")
         self._canvas.pack()
         self.is_running = False
     

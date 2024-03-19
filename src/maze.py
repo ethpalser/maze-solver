@@ -58,13 +58,13 @@ class Maze:
         if self._win is None or not isinstance(self._win, Window):
             return
         self._win.redraw()
-        sleep(0.05)
+        sleep(0.02)
 
     def _break_enterance_and_exit(self):
+        self._cells[0][0].draw("white") # Erase all walls
         self._cells[0][0].has_top_wall = False
-        self._cells[0][0].draw("white") # Erase previous walls
-        self._cells[0][0].draw()
+        self._cells[0][0].draw() # Redraw all walls except removed wall
+        self._cells[self._num_rows-1][self._num_cols-1].draw("white") # Erase all walls
         self._cells[self._num_rows-1][self._num_cols-1].has_bottom_wall = False
-        self._cells[self._num_rows-1][self._num_cols-1].draw("white") # Erase previous walls
-        self._cells[self._num_rows-1][self._num_cols-1].draw() 
+        self._cells[self._num_rows-1][self._num_cols-1].draw() # Redraw all walls except removed wall
         self._animate()

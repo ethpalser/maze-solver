@@ -4,7 +4,9 @@ from point import Point
 allowed_colors = [
     "black",
     "red",
-    "grey"
+    "grey",
+    "white",
+    "#d9d9d9"
 ]
 
 class Line:
