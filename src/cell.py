@@ -6,13 +6,14 @@ class Cell:
 
     def __init__(
         self,
-        window,
         x1, y1,
         x2, y2,
         has_left_wall = True,
         has_right_wall = True,
         has_top_wall = True,
-        has_bottom_wall = True
+        has_bottom_wall = True,
+        window = None
+
     ):
         for point in [x1, x2, y1, y2]:
             if not isinstance(point, int):
@@ -49,7 +50,7 @@ class Cell:
     
 
     def draw_move(self, to_cell, undo=False):
-        if to_cell is None:
+        if self._win is None or not isinstance(self._win, Window) or to_cell is None:
             return
         if not isinstance(to_cell, Cell):
             raise ValueError("Movement cannot be performed as the destination is not a cell")

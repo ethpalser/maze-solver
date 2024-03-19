@@ -11,7 +11,7 @@ class Maze:
         num_cells_y,
         cell_size_x,
         cell_size_y,
-        window  
+        window = None
     ):
         if not isinstance(window, Window):
             raise ValueError("Window must be a window class")
@@ -22,7 +22,7 @@ class Maze:
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
         self._win = window
-        
+
         self._cells = self._create_cells()
         for j in range(0, num_cells_y):
             for i in range(0, num_cells_x):
@@ -36,10 +36,12 @@ class Maze:
                 cell_x2 = cell_x1 + self._cell_size_x
                 cell_y1 = self._y1 + y * self._cell_size_y
                 cell_y2 = cell_y1 + self._cell_size_y
-                list[y].append(Cell(self._win, cell_x1, cell_y1, cell_x2, cell_y2))
+                list[y].append(Cell(cell_x1, cell_y1, cell_x2, cell_y2, self._win))
         return list
     
     def _draw_cell(self, i, j):
+        if self._win is None or not isinstance(self._win, Window):
+            return
         cell = self._cells[i][j]
         if isinstance(cell, Cell):
             cell.draw()
