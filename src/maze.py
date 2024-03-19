@@ -7,31 +7,36 @@ class Maze:
     def __init__(
         self,
         x1, y1,
-        num_cells_x,
-        num_cells_y,
+        num_rows,
+        num_cols,
         cell_size_x,
         cell_size_y,
         window = None
     ):
-        if not isinstance(window, Window):
+        if window is not None and not isinstance(window, Window):
             raise ValueError("Window must be a window class")
+        if num_rows < 0 or num_cols < 0:
+            raise ValueError("Maze cannot have negative rows nor columns")
+        if cell_size_x <= 0 or cell_size_y <= 0:
+            raise ValueError("Cell size must be greater than 0")
+        
         self._x1 = x1
         self._y1 = y1
-        self._num_cells_x = num_cells_x
-        self._num_cells_y = num_cells_y
+        self._num_rows = num_rows
+        self._num_cols = num_cols
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
         self._win = window
 
         self._cells = self._create_cells()
-        for j in range(0, num_cells_y):
-            for i in range(0, num_cells_x):
+        for j in range(0, num_cols):
+            for i in range(0, num_rows):
                 self._draw_cell(i, j)
 
     def _create_cells(self):
-        list = [[] for i in range(0, self._num_cells_y)]
-        for y in range(0, self._num_cells_y):
-            for x in range(0, self._num_cells_x):
+        list = [[] for i in range(0, self._num_cols)]
+        for y in range(0, self._num_cols):
+            for x in range(0, self._num_rows):
                 cell_x1 = self._x1 + x * self._cell_size_x
                 cell_x2 = cell_x1 + self._cell_size_x
                 cell_y1 = self._y1 + y * self._cell_size_y
