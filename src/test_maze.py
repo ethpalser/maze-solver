@@ -37,5 +37,17 @@ class TestMaze(unittest.TestCase):
         self.assertFalse(maze._cells[0][0].has_top_wall)
         self.assertFalse(maze._cells[num_rows-1][num_cols-1].has_bottom_wall)
 
+    def test_remove_cells_visited(self):
+        # Given
+        num_rows = 12
+        num_cols = 10
+        # When
+        maze = Maze(0, 0, num_rows, num_cols, 10, 10)
+        # Then
+        for i in range(0, len(maze._cells)):
+            for j in range(0, len(maze._cells[i])):
+                self.assertFalse(maze._cells[i][j].visited)
+
+
 if __name__ == "__main__":
     unittest.main()

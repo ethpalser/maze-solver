@@ -38,6 +38,7 @@ class Maze:
 
         self._break_enterance_and_exit()
         self._break_walls_r(0, 0)
+        self._reset_cells_visited()
 
     def _create_cells(self):
         list = [[] for i in range(0, self._num_rows)]
@@ -120,3 +121,8 @@ class Maze:
             elif direction == "right":
                 self._remove_wall(i, j + 1, "left")
             self._break_walls_r(*unvisited_neighbors[next_cell])
+
+    def _reset_cells_visited(self):
+        for i in range(0, len(self._cells)):
+            for j in range(0, len(self._cells[i])):
+                self._cells[i][j].visited = False
