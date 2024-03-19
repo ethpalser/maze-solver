@@ -10,8 +10,8 @@ class TestMaze(unittest.TestCase):
         # When
         maze = Maze(0, 0, num_rows, num_cols, 10, 10)
         # Then
-        self.assertEqual(num_rows, len(maze._cells[0]))
-        self.assertEqual(num_cols, len(maze._cells))
+        self.assertEqual(num_rows, len(maze._cells))
+        self.assertEqual(num_cols, len(maze._cells[0]))
 
     def test_create_cells_given_zero_dimensions_should_be_empty(self):
         # Given

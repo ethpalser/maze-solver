@@ -35,8 +35,8 @@ class Maze:
 
     def _create_cells(self):
         list = [[] for i in range(0, self._num_cols)]
-        for y in range(0, self._num_cols):
-            for x in range(0, self._num_rows):
+        for y in range(0, self._num_rows):
+            for x in range(0, self._num_cols):
                 cell_x1 = self._x1 + x * self._cell_size_x
                 cell_x2 = cell_x1 + self._cell_size_x
                 cell_y1 = self._y1 + y * self._cell_size_y
