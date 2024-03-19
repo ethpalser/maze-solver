@@ -7,12 +7,12 @@ class Maze:
 
     def __init__(
         self,
-        x1, y1,
-        num_rows,
-        num_cols,
-        cell_size_x,
-        cell_size_y,
-        window = None,
+        x1:int, y1:int,
+        num_rows:int,
+        num_cols:int,
+        cell_size_x:int,
+        cell_size_y:int,
+        window:Window = None,
         seed = None
     ):
         if window is not None and not isinstance(window, Window):
@@ -126,3 +126,43 @@ class Maze:
         for i in range(0, len(self._cells)):
             for j in range(0, len(self._cells[i])):
                 self._cells[i][j].visited = False
+
+    def solve(self):
+        return self._solve_dfs(0, 0)
+
+    def _solve_dfs(self, i:int, j:int):
+        cell = self._cells[i][j]
+        if not isinstance(cell, Cell):
+            raise Exception(f"Maze does not have a cell at ({i},{j})")
+        
+        cell.visited = True
+        if i == self._num_rows - 1 and j == self._num_cols - 1:
+            return True
+
+        unvisited_neighbors = []
+        if i-1 >= 0 and not cell.has_top_wall and not self._cells[i - 1][j].visited:
+            unvisited_neighbors.append((i - 1, j))
+        if j-1 >= 0 and not cell.has_left_wall and not self._cells[i][j - 1].visited:
+            unvisited_neighbors.append((i, j - 1))
+        if i+1 < self._num_rows and not cell.has_bottom_wall and not self._cells[i + 1][j].visited:
+            unvisited_neighbors.append((i + 1, j))
+        if j+1 < self._num_cols and not cell.has_right_wall and not self._cells[i][j + 1].visited:
+            unvisited_neighbors.append((i, j + 1))
+
+        if len(unvisited_neighbors) == 0:
+            return False
+
+        has_path_to_end = False
+        for neighbor in unvisited_neighbors:
+            neighbor_cell = self._cells[neighbor[0]][neighbor[1]]
+            self._cells[i][j].draw_move(neighbor_cell)
+            self._animate()
+            path_to_end = self._solve_dfs(*neighbor)
+            if not path_to_end:
+                self._cells[i][j].draw_move(neighbor_cell, True)
+                self._animate()
+            else:
+                has_path_to_end = True
+        return has_path_to_end
+
+        

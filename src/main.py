@@ -12,6 +12,7 @@ def main():
 
     win.is_running = True
     print("Running!")
+    maze.solve()
     win.wait_for_close()
     print("Closing...")
 
