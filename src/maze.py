@@ -15,8 +15,8 @@ class Maze:
     ):
         if window is not None and not isinstance(window, Window):
             raise ValueError("Window must be a window class")
-        if num_rows < 0 or num_cols < 0:
-            raise ValueError("Maze cannot have negative rows nor columns")
+        if num_rows <= 0 or num_cols <= 0:
+            raise ValueError("Maze cannot have zero or less rows nor columns")
         if cell_size_x <= 0 or cell_size_y <= 0:
             raise ValueError("Cell size must be greater than 0")
         
@@ -55,4 +55,3 @@ class Maze:
     def _animate(self):
         self._win.redraw()
         sleep(0.05)
-        
