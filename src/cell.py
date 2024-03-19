@@ -30,7 +30,7 @@ class Cell:
     def center_point(self):
         return Point((self._min_x + self._max_x) / 2, (self._min_y + self._max_y) / 2)
 
-    def draw(self, fill_color):
+    def draw(self, fill_color="black"):
         if self._win is None or not isinstance(self._win, Window):
             return
         top_left_point = Point(self._min_x, self._min_y)
