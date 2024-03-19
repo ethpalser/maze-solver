@@ -27,6 +27,7 @@ class Cell:
         self.has_top_wall = has_top_wall
         self.has_bottom_wall = has_bottom_wall
         self._win = window
+        self.visited = False # To track traversal through cells
 
     def center_point(self):
         return Point((self._min_x + self._max_x) / 2, (self._min_y + self._max_y) / 2)
